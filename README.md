@@ -103,4 +103,3 @@ pdflatex REPORT.tex
 - Final report: [`REPORT.tex`](./REPORT.tex)
 - Code: notebooks + EDA script in this repo
 - Data: raw samples in `Raw Data/`, cleaned analytic table in `Data Acquisition and Preprocessing/`
-- Slides: (see team Drive)
