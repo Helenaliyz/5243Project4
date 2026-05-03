@@ -76,6 +76,7 @@ cd "Data Analysis" && python 5243_project4_analysis.py && cd ..
 
 # 3. Modeling + evaluation
 jupyter notebook "Project 4 Modeling.ipynb"
+```
 
 ## Modeling Choices (Summary)
 
