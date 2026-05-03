@@ -10,6 +10,9 @@
 \usepackage{enumitem}
 \usepackage{amsmath}
 \usepackage{titlesec}
+\usepackage{grffile}
+
+\graphicspath{{./Data Analysis/}}
 
 \hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
 \titleformat{\section}{\large\bfseries}{\thesection}{0.6em}{}
@@ -17,7 +20,9 @@
 
 \title{\textbf{Predicting Daily Station-Level Citi Bike Demand:\\
 An End-to-End Machine Learning Pipeline}}
-\author{Project 4 -- STAT GR5243 \\ Team Members: [Member 1], [Member 2], [Member 3], Ketaki Dabade}
+\author{Project 4 -- STAT GR5243 \\
+Team Members: Helena Li (yl6029), Wentao Zhong (wz2753),\\
+Kevin Ma (km4189), Ketaki Dabade (kvd2112)}
 \date{May 5, 2026}
 
 \begin{document}
@@ -150,45 +155,45 @@ modeling choices they motivated.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{Data\ Analysis/daily_demand_trend.png}
+\includegraphics[width=0.7\textwidth]{daily_demand_trend.png}
 \caption{Overall daily Citi Bike demand over the study period.}
 \label{fig:trend}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.48\textwidth]{Data\ Analysis/demand_distribution_histogram.png}
-\includegraphics[width=0.48\textwidth]{Data\ Analysis/demand_distribution_boxplot.png}
+\includegraphics[width=0.48\textwidth]{demand_distribution_histogram.png}
+\includegraphics[width=0.48\textwidth]{demand_distribution_boxplot.png}
 \caption{Distribution of station-day trip counts (right-skewed).}
 \label{fig:dist}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.48\textwidth]{Data\ Analysis/weekday_weekend_boxplot.png}
-\includegraphics[width=0.48\textwidth]{Data\ Analysis/weekday_weekend_average_total_trips.png}
+\includegraphics[width=0.48\textwidth]{weekday_weekend_boxplot.png}
+\includegraphics[width=0.48\textwidth]{weekday_weekend_average_total_trips.png}
 \caption{Weekday vs.\ weekend demand.}
 \label{fig:wkd}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{Data\ Analysis/top_10_busiest_stations.png}
+\includegraphics[width=0.7\textwidth]{top_10_busiest_stations.png}
 \caption{Top 10 busiest stations by total trips.}
 \label{fig:top}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.48\textwidth]{Data\ Analysis/demand_vs_temperature.png}
-\includegraphics[width=0.48\textwidth]{Data\ Analysis/demand_vs_precipitation.png}
+\includegraphics[width=0.48\textwidth]{demand_vs_temperature.png}
+\includegraphics[width=0.48\textwidth]{demand_vs_precipitation.png}
 \caption{Demand vs.\ temperature and precipitation.}
 \label{fig:wx}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{Data\ Analysis/correlation_heatmap.png}
+\includegraphics[width=0.7\textwidth]{correlation_heatmap.png}
 \caption{Correlation matrix of demand, rider/bike-type shares, and weather.}
 \label{fig:corr}
 \end{figure}
@@ -208,21 +213,25 @@ within-cluster compactness, then visualized clusters in 2D using PCA on the
 scaled feature matrix.
 
 \paragraph{Cluster interpretation.}
-The four clusters correspond roughly to:
-\textbf{(0) commuter} -- high weekday demand, high member share;
-\textbf{(1) low-demand} -- low average and peak demand;
-\textbf{(2) leisure} -- elevated casual share and weekend ratio, often near
-parks and waterfronts;
-\textbf{(3) mixed-use} -- moderate demand across rider types.
-The cluster label was carried into the supervised pipeline as a categorical
-predictor.
+Inspecting the per-cluster summary statistics
+(average / median / max daily trips, casual vs.\ member share, weekend-to-weekday
+ratio, and neighborhood flags), the four clusters can be interpreted along a
+\emph{commuter -- mixed-use -- leisure -- low-demand} spectrum: one cluster
+contains high-volume stations dominated by member trips on weekdays, another
+contains low-volume stations, and the remaining two contain stations with
+elevated casual share and weekend ratios (often near parks and waterfronts) or
+moderate demand across rider types. The cluster label was then carried into the
+supervised pipeline as a categorical predictor (one-hot encoded).
 
 \section{Feature Engineering and Preprocessing}
 
 \subsection{Calendar features}
-Month, day-of-month, day-of-week, weekend indicator, and cyclical day-of-week
-encodings (\texttt{dow\_sin}, \texttt{dow\_cos}) so the model recognizes that
-Sunday and Monday are adjacent in weekly time.
+We extracted month, day-of-month, day-of-week, and a weekend indicator from
+the date. For the supervised model we kept the weekend indicator
+(\texttt{is\_weekend}) and the cyclical day-of-week encodings
+(\texttt{dow\_sin}, \texttt{dow\_cos}) so the model recognizes that Sunday and
+Monday are adjacent in weekly time, while excluding the raw integer
+day-of-week to avoid imposing a spurious linear order.
 
 \subsection{Weather features}
 In addition to raw temperature, precipitation, and wind, we added binary
@@ -409,17 +418,22 @@ See \texttt{README.md} for environment setup and run instructions.
 \section{Team Contributions}
 
 \begin{itemize}[leftmargin=1.4em]
-  \item \textbf{[Member 1]} -- Data acquisition (Citi Bike trip files,
-        Open-Meteo weather, station context); data cleaning; produced the
-        final aggregated \texttt{citibike\_station\_day\_clean.csv}.
-  \item \textbf{[Member 2]} -- Exploratory data analysis (figures and
-        summary tables in \texttt{Data Analysis/}).
-  \item \textbf{[Member 3]} -- Unsupervised clustering (K-Means, PCA),
-        feature engineering, supervised modeling (Ridge / Random Forest /
-        Gradient Boosting / tuned RF), and in-notebook model evaluation.
-  \item \textbf{Ketaki Dabade} -- Final report (this document), repository
-        organization and \texttt{README}, model evaluation interpretation,
-        and presentation slides.
+  \item \textbf{Helena Li (yl6029)} -- Data acquisition and cleaning;
+        produced the final aggregated station-day analytic table
+        \texttt{citibike\_station\_day\_clean.csv} (Citi Bike trip records,
+        Open-Meteo weather, station context).
+  \item \textbf{Wentao Zhong (wz2753)} -- Exploratory data analysis in
+        Python; generated the EDA figures and summary tables in
+        \texttt{Data Analysis/}.
+  \item \textbf{Kevin Ma (km4189)} -- Unsupervised clustering (K-Means,
+        PCA), feature engineering, supervised modeling (Ridge / Random
+        Forest / Gradient Boosting / tuned Random Forest), and in-notebook
+        model evaluation; uploaded the updated modeling code and results
+        to GitHub.
+  \item \textbf{Ketaki Dabade (kvd2112)} -- Final written report (this
+        document), repository organization and \texttt{README},
+        interpretation of model evaluation results, and presentation
+        slides.
 \end{itemize}
 
 \end{document}

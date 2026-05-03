@@ -93,10 +93,10 @@ pdflatex REPORT.tex
 
 ## Team Contributions
 
-- **[Member 1]** — Data acquisition, cleaning, station-day aggregation.
-- **[Member 2]** — Exploratory data analysis and figures.
-- **[Member 3]** — Clustering, feature engineering, supervised models, model evaluation.
-- **Ketaki Dabade** — Final report, README and repo organization, evaluation interpretation, presentation slides.
+- **Helena Li (yl6029)** — Data acquisition and cleaning; produced the final aggregated `citibike_station_day_clean.csv`.
+- **Wentao Zhong (wz2753)** — Exploratory data analysis in Python; generated all EDA figures and summary tables in `Data Analysis/`.
+- **Kevin Ma (km4189)** — Clustering (K-Means + PCA), feature engineering, supervised models (Ridge / Random Forest / Gradient Boosting / tuned RF), and in-notebook model evaluation.
+- **Ketaki Dabade (kvd2112)** — Final report (`REPORT.tex`), README and repo organization, evaluation interpretation, and presentation slides.
 
 ## Deliverables
 
