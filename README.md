@@ -77,10 +77,6 @@ cd "Data Analysis" && python 5243_project4_analysis.py && cd ..
 # 3. Modeling + evaluation
 jupyter notebook "Project 4 Modeling.ipynb"
 
-# 4. Build the report
-pdflatex REPORT.tex
-```
-
 ## Modeling Choices (Summary)
 
 - **Target**: `log(1 + daily_trip_count)` — stabilizes the right-skewed demand distribution.
