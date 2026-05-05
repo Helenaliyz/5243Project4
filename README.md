@@ -233,10 +233,10 @@ The cleaned analytic dataset is already included in the repository, so users can
 
 ## Team Contributions
 
-* **Helena Li (yl6029)**: Built the complete data acquisition and preprocessing pipeline, including the web scraper, Open-Meteo API integration, cleaning, aggregation, and the final analytic CSV. She developed and deployed the full interactive Shiny dashboard across all five tabs with a live demand predictor at [shinyapps.io](https://helenaliyz.shinyapps.io/citibike-dashboard/), and wrote and revised the full project report and repository README.
+* **Helena Li (yl6029)**: Built the complete data acquisition and preprocessing pipeline, including the web scraper, Open-Meteo API integration, cleaning, aggregation, and the final analytic CSV. She developed and deployed the full interactive Shiny dashboard across all five sections, and wrote and revised the full project report and repository README.
 * **Wentao Zhong (wz2753)**: Conducted exploratory data analysis in Python, generated EDA figures and summary tables in `Data Analysis/`, and supported interpretation of demand patterns, weather relationships, and station-level trends.
 * **Kevin Ma (km4189)**: Developed the modeling notebook, including K-Means clustering, PCA visualization, feature engineering, supervised regression models, hyperparameter tuning, and model evaluation.
-* **Ketaki Dabade (kvd2112)**: Contributed to the final written report, repository organization, evaluation interpretation, and presentation slides.
+* **Ketaki Dabade (kvd2112)**: Wrote the final written report, repository organization and README, evaluation interpretation, and presentation slides.
 
 ## Deliverables
 
